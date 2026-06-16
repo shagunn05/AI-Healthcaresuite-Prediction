@@ -98,7 +98,7 @@ st.markdown("---")
 @st.cache_resource
 def load_ann_model():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    MODEL_PATH = os.path.join(BASE_DIR, "Models", "ann_model.keras")
+    MODEL_PATH = os.path.join(BASE_DIR, "models", "ann_model.keras")
 
     if not os.path.exists(MODEL_PATH):
         st.error(f"Model file not found: {MODEL_PATH}")

@@ -4,5 +4,5 @@ pandas
 scikit-learn
 pillow
 matplotlib
-tensorflow
+tensorflow==2.12.0
 plotly
