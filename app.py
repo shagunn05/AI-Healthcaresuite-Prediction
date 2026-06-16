@@ -6,6 +6,8 @@ import os
 from tensorflow.keras.models import load_model
 import streamlit as st
 import plotly.express as px
+import keras
+import tensorflow as tf
 
 # ==========================================
 # 1. Global Page Layout Setup
@@ -104,8 +106,27 @@ def load_ann_model():
         st.error(f"Model file not found: {MODEL_PATH}")
         st.stop()
 
-    return load_model(MODEL_PATH)
+    
+    # 2. Try loading with compatibility fallback
+    try:
+        model = tf.keras.models.load_model(MODEL_PATH)
+    except TypeError:
+        
+        
+        def workaround_dense(*args, **kwargs):
+            kwargs.pop('quantization_config', None)
+            kwargs.pop('batch_shape', None)
+            return keras.layers.Dense(*args, **kwargs)
+            
+        model = tf.keras.models.load_model(
+            MODEL_PATH,
+            custom_objects={"Dense": workaround_dense}
+        )
+        
+    # 3. Return the successfully loaded model variable!
+    return model
 
+    
 model = load_ann_model()
 
 # ---------------- INPUT SECTION ----------------
