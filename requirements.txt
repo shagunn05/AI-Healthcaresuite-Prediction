@@ -6,3 +6,4 @@ pillow
 matplotlib
 tensorflow==2.12.0
 plotly
+scikit-learn-intelex
