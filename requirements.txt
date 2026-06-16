@@ -4,6 +4,6 @@ pandas
 scikit-learn
 pillow
 matplotlib
-tensorflow==2.12.0
+tensorflow
 plotly
 scikit-learn-intelex
